@@ -303,3 +303,42 @@ const resolveFetch = () => {
 };
 
 resolveFetch().then(animationTimeline());
+// --- Button Interactivity ---
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const wishText = document.getElementById("wishText");
+
+// Yes button
+yesBtn.addEventListener("click", () => {
+  wishText.textContent = "Yay! 💖 I'm so happy you said Yes!";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+
+  for (let i = 0; i < 10; i++) {
+    const heart = document.createElement("div");
+    heart.textContent = "💗";
+    heart.style.position = "absolute";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = "80%";
+    heart.style.fontSize = Math.random() * 30 + 20 + "px";
+    document.body.appendChild(heart);
+
+    const interval = setInterval(() => {
+      let top = parseFloat(heart.style.top);
+      if (top < -50) {
+        heart.remove();
+        clearInterval(interval);
+      } else {
+        heart.style.top = top - 2 + "px";
+      }
+    }, 20);
+  }
+});
+
+// No button
+noBtn.addEventListener("click", () => {
+  wishText.textContent = "Oh… maybe next time 😅";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+});
